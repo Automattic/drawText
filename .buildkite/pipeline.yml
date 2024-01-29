@@ -1,10 +1,10 @@
 # Nodes with values to reuse in the pipeline.
 common_params:
   plugins: &common_plugins
-    - automattic/a8c-ci-toolkit#2.15.0
+    - automattic/a8c-ci-toolkit#2.17.0
   # Common environment values to use with the `env` key.
   env: &common_env
-    IMAGE_ID: xcode-13
+    IMAGE_ID: xcode-15.2
 
 # This is the default pipeline – it will build and test the app
 steps:
@@ -18,6 +18,8 @@ steps:
       swift test
     env: *common_env
     plugins: *common_plugins
+    agents:
+      queue: "mac"
 
   #################
   # Publish the Binary (if we're building a tag)
